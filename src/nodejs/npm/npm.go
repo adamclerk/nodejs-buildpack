@@ -4,7 +4,6 @@ import (
 	"io"
 	"os"
 	"path/filepath"
-	"strings"
 
 	"github.com/cloudfoundry/libbuildpack"
 )
@@ -62,14 +61,19 @@ func (n *NPM) doBuild(buildDir string) (bool, string, error) {
 		return false, "", nil
 	}
 
-	files := []string{"package.json"}
-	for _, filename := range []string{"package-lock.json", "npm-shrinkwrap.json"} {
-		if found, err := libbuildpack.FileExists(filepath.Join(buildDir, filename)); err != nil {
-			return false, "", err
-		} else if found {
-			files = append(files, filename)
-		}
-	}
+	return false, "", nil
 
-	return true, strings.Join(files, " + "), nil
+	/*
+		files := []string{"package.json"}
+		for _, filename := range []string{"package-lock.json", "npm-shrinkwrap.json"} {
+			if found, err := libbuildpack.FileExists(filepath.Join(buildDir, filename)); err != nil {
+				return false, "", err
+			} else if found {
+				files = append(files, filename)
+			}
+		}
+
+		return true, strings.Join(files, " + "), nil
+	*/
+
 }
